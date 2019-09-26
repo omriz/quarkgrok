@@ -9,6 +9,9 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import io.github.omriz.quarkgrok.structs.QueryResults;
 
+// Atempting to implement a subset of opengrok's web api:
+// https://github.com/oracle/opengrok/wiki/Web-services
+// https://opengrok.docs.apiary.io/#
 @Path("/api/v1")
 @RegisterRestClient
 public interface OpenGrokClientInterface {
