@@ -10,9 +10,9 @@ import io.github.omriz.quarkgrok.structs.QueryResults;
 public interface BackendInterface {
     public URI getUri();
 
-    public String fetchWeb(String path) throws MalformedURLException, URISyntaxException, IOException;
+    public String fetchWeb(String path);
 
-    public String fetchRaw(String path) throws MalformedURLException, URISyntaxException, IOException;
+    public String fetchRaw(String path);
 
     public String UID();
 
