@@ -60,6 +60,7 @@ public class OpenGrokbackendTest {
 
     @Test
     public void simpleQueryTest() {
+        // The response was taken from the opengrok APIary documentation.
         String response = "{\n" + "\"time\": 13,\n" + "\"resultCount\": 35,\n" + "\"startDocument\": 0,\n"
                 + "\"endDocument\": 0,\n" + "\"results\": {\n"
                 + "  \"/opengrok/test/org/opensolaris/opengrok/history/hg-export-renamed.txt\": [{\n"
