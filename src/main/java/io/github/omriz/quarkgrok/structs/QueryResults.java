@@ -1,5 +1,6 @@
 package io.github.omriz.quarkgrok.structs;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -8,13 +9,13 @@ public class QueryResults {
     private Integer resultCount;
     private Integer startDocument;
     private Integer endDocument;
-    private Map<String, ResultLine> results;
+    private Map<String, List<ResultLine>> results;
 
     public QueryResults() {
     }
 
     public QueryResults(Integer time, Integer resultCount, Integer startDocument, Integer endDocument,
-            Map<String, ResultLine> results) {
+            Map<String, List<ResultLine>> results) {
         this.time = time;
         this.resultCount = resultCount;
         this.startDocument = startDocument;
@@ -54,11 +55,11 @@ public class QueryResults {
         this.endDocument = endDocument;
     }
 
-    public Map<String, ResultLine> getResults() {
+    public Map<String, List<ResultLine>> getResults() {
         return this.results;
     }
 
-    public void setResults(Map<String, ResultLine> results) {
+    public void setResults(Map<String, List<ResultLine>> results) {
         this.results = results;
     }
 
