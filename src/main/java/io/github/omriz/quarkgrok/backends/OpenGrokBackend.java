@@ -42,7 +42,7 @@ public class OpenGrokBackend implements BackendInterface {
     }
 
     public QueryResults query(String full, String def, String symbol, String path, String hist, String type) {
-        return this.openGrokClientInterface.getQueryResults(full, def, symbol, path, hist, type, "", "", "");
+        return this.openGrokClientInterface.getQueryResults(full, def, symbol, path, hist, type, "", "");
     }
 
 }

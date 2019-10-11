@@ -26,7 +26,6 @@ public class QueryResultResource {
             @DefaultValue("") @QueryParam("def") String def, @DefaultValue("") @QueryParam("symbol") String symbol,
             @DefaultValue("") @QueryParam("path") String path, @DefaultValue("") @QueryParam("hist") String hist,
             @DefaultValue("") @QueryParam("type") String type,
-            @DefaultValue("") @QueryParam("projects") String projects,
             @DefaultValue("") @QueryParam("maxresults") String maxresults,
             @DefaultValue("") @QueryParam("start") String start) {
         LOGGER.info(full);

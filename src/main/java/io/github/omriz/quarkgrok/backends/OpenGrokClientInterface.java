@@ -14,13 +14,15 @@ import io.github.omriz.quarkgrok.structs.QueryResults;
 @Path("/")
 @RegisterRestClient
 public interface OpenGrokClientInterface {
+    // Note: We are deliberitly emitting the projects paramater to search all
+    // projects.
     @GET
     @Path("/api/v1/search")
     @Produces(MediaType.APPLICATION_JSON)
     QueryResults getQueryResults(@QueryParam("full") String full, @QueryParam("def") String def,
-                                 @QueryParam("symbol") String symbol, @QueryParam("path") String path, @QueryParam("hist") String hist,
-                                 @QueryParam("type") String type, @QueryParam("projects") String projects,
-                                 @QueryParam("maxresults") String maxresults, @QueryParam("start") String start);
+            @QueryParam("symbol") String symbol, @QueryParam("path") String path, @QueryParam("hist") String hist,
+            @QueryParam("type") String type, @QueryParam("maxresults") String maxresults,
+            @QueryParam("start") String start);
 
     @GET
     @Path("/xref/{path: .*}")

@@ -12,23 +12,26 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Observes;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import io.github.omriz.quarkgrok.structs.QueryResults;
 import io.github.omriz.quarkgrok.structs.ResultLine;
+import io.quarkus.runtime.StartupEvent;
 
 @ApplicationScoped
 public class BackendsManager implements BackendsManagerInterface {
     private static final Logger LOGGER = Logger.getLogger(BackendsManager.class.getName());
     private ArrayList<BackendInterface> backendInterfaces = new ArrayList<>();
     @ConfigProperty(name = "quarkgrok.backends.manager.address")
-    private String address;
+    String address;
     private URI uri;
     @ConfigProperty(name = "quarkgrok.backends.manager.servers")
-    private List<String> backendAddresses;
+    List<String> backendAddresses;
 
-    BackendsManager() {
+    // Intializing the manager and backends.
+    void onStart(@Observes StartupEvent ev) {
         try {
             uri = new URI(address);
         } catch (URISyntaxException e) {
@@ -78,19 +81,15 @@ public class BackendsManager implements BackendsManagerInterface {
     }
 
     public QueryResults query(String full, String def, String symbol, String path, String hist, String type) {
-        LOGGER.info(full);
-        LOGGER.info(def);
-        LOGGER.info(symbol);
-        LOGGER.info(path);
-        LOGGER.info(hist);
-        LOGGER.info(type);
-
         List<QueryResults> queryResultList = backendInterfaces.parallelStream()
-                .map(b -> tryQuery(b, full, def, symbol, path, hist, type)).filter(q -> q != null)
+                .map(b -> tryQuery(b, full, def, symbol, path, hist, type))//.filter(q -> q != null)
                 .collect(Collectors.toList());
         // Combine the results to one.
         QueryResults queryResult = new QueryResults(0, 0, 0, 0, new HashMap<String, List<ResultLine>>());
         for (QueryResults qResults : queryResultList) {
+            LOGGER.info(qResults.getTime().toString());
+            LOGGER.info(qResults.getResultCount().toString());
+            LOGGER.info(qResults.getResults().keySet().toString());
             if (qResults.getTime() > queryResult.getTime()) {
                 queryResult.setTime(qResults.getTime());
             }
