@@ -62,7 +62,7 @@ public class BackendsManager implements BackendsManagerInterface {
         Optional<String> fetchResult = backendInterfaces.parallelStream().map(b -> tryFetchWeb(b, path))
                 .filter(s -> s != "").findFirst();
         if (fetchResult.isEmpty()) {
-            return "Not Found";
+            return null;
         }
         return fetchResult.get();
     }
@@ -71,7 +71,7 @@ public class BackendsManager implements BackendsManagerInterface {
         Optional<String> fetchResult = backendInterfaces.parallelStream().map(b -> tryFetchRaw(b, path))
                 .filter(s -> s != "").findFirst();
         if (fetchResult.isEmpty()) {
-            return "Not Found";
+            return null;
         }
         return fetchResult.get();
     }

@@ -6,6 +6,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import io.github.omriz.quarkgrok.backends.BackendsManagerInterface;
 
@@ -18,7 +20,11 @@ public class RawFetchResource {
     @GET
     @Path("/{path: .*}")
     @Produces(MediaType.TEXT_PLAIN)
-    public String getRawPath(@PathParam("path") String path) {
-        return backendsManagerInterface.fetchRaw(path);
+    public Response getRawPath(@PathParam("path") String path) {
+        String resp = backendsManagerInterface.fetchRaw(path);
+        if (resp == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(resp).build();
     }
 }
