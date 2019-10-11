@@ -25,6 +25,11 @@ public interface OpenGrokClientInterface {
             @QueryParam("start") String start);
 
     @GET
+    @Path("/api/v1/suggest/config")
+    @Produces(MediaType.APPLICATION_JSON)
+    String getSuggestConfig();
+
+    @GET
     @Path("/xref/{path: .*}")
     @Produces(MediaType.TEXT_HTML)
     String getXrefPath(@PathParam("path") String path);

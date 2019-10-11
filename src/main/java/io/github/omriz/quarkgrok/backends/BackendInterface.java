@@ -11,6 +11,8 @@ public interface BackendInterface {
 
     public String fetchRaw(String path);
 
+    public String fetchSuggestConfig();
+
     public String UID();
 
     public QueryResults query(String full, String def, String symbol, String path, String hist, String type);

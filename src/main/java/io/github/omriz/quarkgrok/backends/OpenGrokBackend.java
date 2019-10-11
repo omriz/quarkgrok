@@ -36,6 +36,9 @@ public class OpenGrokBackend implements BackendInterface {
     public String fetchRaw(String path) {
         return this.openGrokClientInterface.getRawPath(this.trimPathPrefix(path, "raw"));
     }
+    public String fetchSuggestConfig() {
+        return this.openGrokClientInterface.getSuggestConfig();
+    }
 
     public String UID() {
         return Base64.getEncoder().encodeToString(this.uri.toString().getBytes());

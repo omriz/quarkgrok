@@ -76,6 +76,16 @@ public class BackendsManager implements BackendsManagerInterface {
         return fetchResult.get();
     }
 
+    public String fetchSuggestConfig() {
+        Optional<String> fetchResult = backendInterfaces.parallelStream().map(b -> tryFetchSuggestConfig(b))
+                .filter(s -> s != "").findFirst();
+        if (fetchResult.isEmpty()) {
+            return null;
+        }
+        return fetchResult.get();
+
+    }
+
     public String UID() {
         return Base64.getEncoder().encodeToString(this.uri.toString().getBytes());
     }
@@ -120,7 +130,13 @@ public class BackendsManager implements BackendsManagerInterface {
             return "";
         }
     }
-
+    public static String tryFetchSuggestConfig(BackendInterface backendInterface) {
+        try {
+            return backendInterface.fetchSuggestConfig();
+        } catch (javax.ws.rs.WebApplicationException e) {
+            return "";
+        }
+    }
     public static QueryResults tryQuery(BackendInterface backendInterface, String full, String def, String symbol,
             String path, String hist, String type) {
         try {
