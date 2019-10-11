@@ -1,7 +1,5 @@
 package io.github.omriz.quarkgrok;
 
-import java.util.logging.Logger;
-
 import javax.inject.Inject;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -18,7 +16,6 @@ public class QueryResultResource {
 
     @Inject
     BackendsManagerInterface backendsManagerInterface;
-    private static final Logger LOGGER = Logger.getLogger(QueryResultResource.class.getName());
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -28,12 +25,6 @@ public class QueryResultResource {
             @DefaultValue("") @QueryParam("type") String type,
             @DefaultValue("") @QueryParam("maxresults") String maxresults,
             @DefaultValue("") @QueryParam("start") String start) {
-        LOGGER.info(full);
-        LOGGER.info(def);
-        LOGGER.info(symbol);
-        LOGGER.info(path);
-        LOGGER.info(hist);
-        LOGGER.info(type);
         return backendsManagerInterface.query(full, def, symbol, path, hist, type);
     }
 }
