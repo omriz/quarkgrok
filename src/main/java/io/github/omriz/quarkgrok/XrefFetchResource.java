@@ -10,17 +10,17 @@ import javax.ws.rs.core.Response;
 
 import io.github.omriz.quarkgrok.backends.BackendsManagerInterface;
 
-@Path("/raw")
-public class RawFetchResource {
+@Path("/xref")
+public class XrefFetchResource {
 
     @Inject
     BackendsManagerInterface backendsManagerInterface;
 
     @GET
     @Path("/{path: .*}")
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response getRawPath(@PathParam("path") String path) {
-        String resp = backendsManagerInterface.fetchRaw(path);
+    @Produces(MediaType.TEXT_HTML)
+    public Response getXrefPath(@PathParam("path") String path) {
+        String resp = backendsManagerInterface.fetchWeb(path);
         if (resp == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
